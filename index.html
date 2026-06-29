@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praduman Rai — DevOps Engineer</title>
+<meta name="description" content="Praduman Rai — DevOps Engineer. AWS, Docker, Kubernetes, Jenkins, Terraform, CI/CD.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1320;
+    --bg-panel:#101a2c;
+    --bg-panel-2:#0e1726;
+    --text:#e7edf6;
+    --text-dim:#8a9bb3;
+    --text-faint:#5c6e87;
+    --border:#1f2f47;
+    --border-soft:#16223a;
+    --amber:#f3a73a;
+    --cyan:#52d6c8;
+    --rose:#f1707d;
+    --amber-glow: rgba(243,167,58,0.35);
+    --cyan-glow: rgba(82,214,200,0.35);
+    --radius: 10px;
+    --display: 'Space Grotesk', 'Segoe UI', sans-serif;
+    --body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+    --maxw: 1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 80% -10%, rgba(82,214,200,0.07), transparent 60%),
+      radial-gradient(ellipse 800px 500px at -10% 10%, rgba(243,167,58,0.06), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  h1,h2,h3,h4{font-family:var(--display); margin:0; letter-spacing:-0.01em; color:var(--text);}
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--amber-glow); color:#fff;}
+  :focus-visible{outline:2px solid var(--cyan); outline-offset:3px; border-radius:4px;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  section{padding:96px 0;}
+  @media (max-width:720px){ section{padding:64px 0;} }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--cyan); display:flex; align-items:center; gap:10px; margin-bottom:16px;
+  }
+  .eyebrow::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 0 3px var(--cyan-glow);}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head h2{font-size:clamp(26px,3.4vw,36px); font-weight:600;}
+  .section-head .sub{color:var(--text-dim); margin-top:12px; font-size:15.5px;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,19,32,0.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:14.5px; color:var(--text);}
+  .brand .dot{width:9px; height:9px; border-radius:2px; background:var(--amber); box-shadow:0 0 0 3px var(--amber-glow);}
+  .nav-links{display:flex; gap:28px; font-size:14px; color:var(--text-dim);}
+  .nav-links a{transition:color .15s;}
+  .nav-links a:hover, .nav-links a.active{color:var(--text);}
+  .nav-cta{display:flex; align-items:center; gap:14px;}
+  .nav-toggle{display:none; background:none; border:1px solid var(--border); border-radius:8px; width:38px; height:34px; color:var(--text); cursor:pointer;}
+  @media (max-width:840px){
+    .nav-links{position:absolute; top:64px; left:0; right:0; background:var(--bg-panel); flex-direction:column; padding:18px 24px; gap:16px; border-bottom:1px solid var(--border-soft); display:none;}
+    .nav-links.open{display:flex;}
+    .nav-toggle{display:inline-flex; align-items:center; justify-content:center;}
+    .nav-cta .btn-text{display:none;}
+  }
+
+  /* ---------- BUTTONS / BADGES ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--body); font-weight:600; font-size:14px;
+    padding:11px 18px; border-radius:8px; cursor:pointer; border:1px solid transparent; transition:transform .15s, border-color .15s, background .15s;
+    white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:linear-gradient(180deg, var(--amber), #e08f1f); color:#1a1102;}
+  .btn-primary:hover{filter:brightness(1.06);}
+  .btn-ghost{border-color:var(--border); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan);}
+  .btn-sm{padding:8px 14px; font-size:13px;}
+  .btn svg{width:15px; height:15px; flex-shrink:0;}
+
+  .badge{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.02em; color:var(--text-dim);
+    border:1px solid var(--border); border-radius:6px; padding:4px 9px; display:inline-flex; align-items:center; gap:6px;
+  }
+  .badge-row{display:flex; flex-wrap:wrap; gap:8px;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:64px; padding-bottom:64px;}
+  .hero-grid{display:grid; grid-template-columns:1.3fr 0.9fr; gap:56px; align-items:center;}
+  @media (max-width:880px){ .hero-grid{grid-template-columns:1fr; gap:40px;} }
+  .hero h1{font-size:clamp(36px,5.4vw,58px); font-weight:700; line-height:1.04; margin-top:14px;}
+  .hero h1 .accent{color:var(--amber);}
+  .hero .tagline{margin-top:18px; color:var(--text-dim); font-size:17px; max-width:520px;}
+  .hero-ctas{display:flex; gap:12px; margin-top:30px; flex-wrap:wrap;}
+  .hero-stats{display:flex; gap:26px; margin-top:34px; flex-wrap:wrap;}
+  .hero-stat b{font-family:var(--mono); font-size:20px; color:var(--text); display:block;}
+  .hero-stat span{font-size:12.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.06em;}
+
+  .hero-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:16px; padding:28px;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .hero-avatar{width:72px; height:72px; border-radius:14px; border:1px solid var(--border); object-fit:cover;}
+  .hero-card .who{display:flex; gap:14px; align-items:center; margin-bottom:18px;}
+  .hero-card .who h3{font-size:16px;}
+  .hero-card .who p{font-size:13px; color:var(--text-dim); margin-top:3px;}
+  .contact-list{display:flex; flex-direction:column; gap:11px; margin-top:6px;}
+  .contact-list a, .contact-list span{display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--text-dim); transition:color .15s;}
+  .contact-list a:hover{color:var(--cyan);}
+  .contact-list svg{width:15px; height:15px; flex-shrink:0; color:var(--text-faint);}
+
+  /* ---------- PIPELINE STRIP (signature element) ---------- */
+  .pipeline{margin-top:42px;}
+  .pipeline-label{font-family:var(--mono); font-size:11.5px; color:var(--text-faint); margin-bottom:12px; letter-spacing:0.05em;}
+  .pipeline-track{display:flex; align-items:center; gap:0; overflow-x:auto; padding-bottom:6px;}
+  .pstage{display:flex; align-items:center; flex-shrink:0;}
+  .pstage .node{
+    display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:12.5px;
+    border:1px solid var(--border); border-radius:999px; padding:8px 14px; color:var(--text-faint);
+    background:var(--bg-panel-2); transition:border-color .4s, color .4s, box-shadow .4s;
+  }
+  .pstage .node .led{width:7px; height:7px; border-radius:50%; background:var(--text-faint); transition:background .4s, box-shadow .4s;}
+  .pstage .arrow{width:26px; height:1px; background:var(--border); margin:0 2px; position:relative; flex-shrink:0;}
+  .pstage.live .node{border-color:var(--amber); color:var(--text); box-shadow:0 0 0 3px var(--amber-glow);}
+  .pstage.live .node .led{background:var(--amber); box-shadow:0 0 8px var(--amber);}
+  .pstage.done .node{border-color:var(--border); color:var(--text-dim);}
+  .pstage.done .node .led{background:var(--cyan);}
+  .pstage.ok .node{border-color:var(--cyan); color:var(--text); box-shadow:0 0 0 3px var(--cyan-glow);}
+  .pstage.ok .node .led{background:var(--cyan); box-shadow:0 0 8px var(--cyan);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:48px;}
+  @media (max-width:840px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{color:var(--text-dim); font-size:15.5px; margin-bottom:16px;}
+  .about-text p:first-child{color:var(--text); font-size:17px;}
+  .fact-panel{background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:22px;}
+  .fact-row{display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--border-soft); font-size:13.5px;}
+  .fact-row:last-child{border-bottom:none;}
+  .fact-row span:first-child{color:var(--text-faint); font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.04em;}
+  .fact-row span:last-child{color:var(--text); text-align:right;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:880px){ .skills-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-card{background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px;}
+  .skill-card h4{font-size:13px; font-family:var(--mono); color:var(--cyan); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:13px;}
+  .skill-card .badge-row{gap:7px;}
+  .skill-card .badge{color:var(--text-dim);}
+
+  /* ---------- PROJECT CARDS ---------- */
+  .proj-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  @media (max-width:840px){ .proj-grid{grid-template-columns:1fr;} }
+  .proj-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:14px; padding:26px;
+    display:flex; flex-direction:column; transition:border-color .2s, transform .2s;
+  }
+  .proj-card:hover{border-color:var(--cyan); transform:translateY(-3px);}
+  .proj-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;}
+  .proj-top h3{font-size:18px;}
+  .proj-tag{font-family:var(--mono); font-size:10.5px; color:var(--amber); border:1px solid rgba(243,167,58,0.35); background:rgba(243,167,58,0.08); padding:4px 9px; border-radius:6px; flex-shrink:0; white-space:nowrap;}
+  .proj-desc{color:var(--text-dim); font-size:14px; margin-bottom:16px;}
+  .proj-feats{list-style:none; margin:0 0 18px; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .proj-feats li{font-size:13.5px; color:var(--text-dim); padding-left:18px; position:relative;}
+  .proj-feats li::before{content:"›"; position:absolute; left:0; color:var(--cyan); font-family:var(--mono);}
+  .proj-card .badge-row{margin-bottom:18px;}
+  .proj-foot{margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+  .proj-note{font-size:12px; color:var(--text-faint); font-style:italic;}
+
+  /* ---------- ARCHITECTURE ---------- */
+  .arch-panel{background:var(--bg-panel); border:1px solid var(--border); border-radius:14px; padding:30px; display:grid; grid-template-columns:1.1fr 1fr; gap:36px; align-items:center;}
+  @media (max-width:880px){ .arch-panel{grid-template-columns:1fr;} }
+  .arch-panel svg{width:100%; height:auto;}
+  .arch-notes{display:flex; flex-direction:column; gap:14px;}
+  .arch-notes .note{display:flex; gap:12px; font-size:14px; color:var(--text-dim);}
+  .arch-notes .note b{color:var(--text); font-weight:600;}
+  .arch-notes .marker{width:8px; height:8px; border-radius:2px; margin-top:6px; flex-shrink:0;}
+
+  /* ---------- GITHUB STATS ---------- */
+  .gh-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:36px;}
+  @media (max-width:780px){ .gh-grid{grid-template-columns:repeat(2,1fr);} }
+  .gh-stat{background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px;}
+  .gh-stat b{font-family:var(--mono); font-size:26px; display:block; color:var(--text);}
+  .gh-stat span{font-size:12px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.05em;}
+  .gh-panels{display:grid; grid-template-columns:1.1fr 1fr; gap:22px;}
+  @media (max-width:880px){ .gh-panels{grid-template-columns:1fr;} }
+  .gh-panel{background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:24px;}
+  .gh-panel h4{font-family:var(--mono); font-size:12.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-dim); margin-bottom:18px;}
+  .lang-row{margin-bottom:13px;}
+  .lang-row .lang-label{display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;}
+  .lang-row .lang-label span:last-child{font-family:var(--mono); color:var(--text-faint);}
+  .lang-bar{height:7px; border-radius:4px; background:var(--bg-panel-2); overflow:hidden;}
+  .lang-bar i{display:block; height:100%; border-radius:4px;}
+  .contrib-img{border-radius:8px; border:1px solid var(--border-soft); width:100%; background:var(--bg-panel-2); min-height:120px;}
+  .gh-note{font-size:12.5px; color:var(--text-faint); margin-top:14px; line-height:1.6;}
+  .repo-tree{font-family:var(--mono); font-size:12.5px; color:var(--text-dim); line-height:1.9; white-space:pre;}
+  .repo-tree b{color:var(--cyan);}
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-card{background:var(--bg-panel); border:1px solid var(--border); border-left:3px solid var(--amber); border-radius:var(--radius); padding:28px;}
+  .exp-head{display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .exp-head h3{font-size:19px;}
+  .exp-head .role-sub{color:var(--text-dim); font-size:14px; margin-top:4px;}
+  .exp-head time{font-family:var(--mono); font-size:12.5px; color:var(--text-faint); white-space:nowrap;}
+  .exp-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px;}
+  .exp-list li{font-size:14.5px; color:var(--text-dim); padding-left:20px; position:relative;}
+  .exp-list li::before{content:"";position:absolute; left:0; top:8px; width:6px; height:6px; border-radius:50%; background:var(--cyan);}
+
+  /* ---------- TIMELINE (certs) ---------- */
+  .timeline{position:relative; padding-left:28px; border-left:1px solid var(--border);}
+  .t-item{position:relative; padding-bottom:28px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{content:""; position:absolute; left:-33px; top:3px; width:11px; height:11px; border-radius:50%; background:var(--bg); border:2px solid var(--cyan);}
+  .t-item .t-year{font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:0.04em;}
+  .t-item h4{font-size:15.5px; margin-top:6px;}
+  .t-item p{font-size:13px; color:var(--text-faint); margin-top:3px;}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  @media (max-width:700px){ .edu-grid{grid-template-columns:1fr;} }
+  .edu-card{background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:22px;}
+  .edu-card h4{font-size:15.5px; margin-bottom:6px;}
+  .edu-card p{font-size:13.5px; color:var(--text-dim);}
+  .edu-card .edu-tag{font-family:var(--mono); font-size:11px; color:var(--text-faint); margin-top:10px; display:block;}
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .ach-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  @media (max-width:880px){ .ach-grid{grid-template-columns:repeat(2,1fr);} }
+  .ach-card{background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px;}
+  .ach-card svg{width:22px; height:22px; color:var(--amber); margin-bottom:14px;}
+  .ach-card h4{font-size:14.5px; margin-bottom:6px;}
+  .ach-card p{font-size:13px; color:var(--text-faint);}
+
+  /* ---------- ROADMAP ---------- */
+  .road-track{display:flex; gap:0; overflow-x:auto; padding:6px 0 18px;}
+  .road-stop{flex:1 0 200px; position:relative; padding:0 22px 0 0;}
+  .road-stop::after{content:""; position:absolute; top:17px; right:0; width:22px; height:1px; background:var(--border);}
+  .road-stop:last-child::after{display:none;}
+  .road-dot{width:13px; height:13px; border-radius:50%; border:2px solid var(--border); background:var(--bg-panel); margin-bottom:14px;}
+  .road-stop.now .road-dot{border-color:var(--amber); background:var(--amber); box-shadow:0 0 0 4px var(--amber-glow);}
+  .road-stop.done .road-dot{border-color:var(--cyan); background:var(--cyan);}
+  .road-stop h4{font-size:14px; margin-bottom:6px;}
+  .road-stop .road-when{font-family:var(--mono); font-size:11px; color:var(--text-faint); margin-bottom:8px; display:block;}
+  .road-stop p{font-size:12.5px; color:var(--text-dim);}
+  .road-stop.now h4{color:var(--amber);}
+
+  /* ---------- BLOG ---------- */
+  .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:840px){ .blog-grid{grid-template-columns:1fr;} }
+  .blog-card{border:1px dashed var(--border); border-radius:var(--radius); padding:22px; min-height:150px; display:flex; flex-direction:column; justify-content:space-between; opacity:0.75;}
+  .blog-card span.tag{font-family:var(--mono); font-size:10.5px; color:var(--text-faint); border:1px solid var(--border); padding:3px 8px; border-radius:5px; width:fit-content;}
+  .blog-card h4{font-size:14.5px; color:var(--text-dim); margin-top:14px;}
+  .blog-card p{font-size:12.5px; color:var(--text-faint); margin-top:8px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr 1.1fr; gap:40px;}
+  @media (max-width:880px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-info .contact-list{margin-top:22px; gap:16px;}
+  .contact-info .contact-list a, .contact-info .contact-list span{font-size:14.5px;}
+  .form-panel{background:var(--bg-panel); border:1px solid var(--border); border-radius:14px; padding:28px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:12.5px; font-family:var(--mono); color:var(--text-dim); margin-bottom:8px;}
+  .field input, .field textarea{
+    width:100%; background:var(--bg-panel-2); border:1px solid var(--border); border-radius:8px; color:var(--text);
+    padding:11px 13px; font-family:var(--body); font-size:14px; resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--cyan); outline:none;}
+  .field .err{font-size:12px; color:var(--rose); margin-top:6px; min-height:14px;}
+  .form-status{font-size:13px; margin-top:6px; color:var(--cyan); min-height:18px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--border-soft); padding:40px 0;}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .foot-row p{font-size:12.5px; color:var(--text-faint);}
+  .back-top{font-family:var(--mono); font-size:12.5px; color:var(--text-dim); border:1px solid var(--border); border-radius:7px; padding:8px 12px;}
+  .back-top:hover{color:var(--cyan); border-color:var(--cyan);}
+
+  /* reveal */
+  [data-reveal]{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  [data-reveal].in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="dot"></span> praduman.rai</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#github">GitHub</a>
+      <a href="#experience">Experience</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="Praduman-Rai-Resume.pdf" download class="btn btn-ghost btn-sm btn-text">Resume</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<a id="top"></a>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Delhi, India · Available for DevOps / Cloud roles</div>
+      <h1>Praduman Rai<br><span class="accent">DevOps Engineer.</span></h1>
+      <p class="tagline">3+ years in technical support, now building automation, CI/CD pipelines, and cloud infrastructure — moving from keeping systems running to designing the systems that run themselves.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          View hands-on projects
+        </a>
+        <a href="Praduman-Rai-Resume.pdf" download class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download résumé
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>3+ yrs</b><span>IT / support experience</span></div>
+        <div class="hero-stat"><b>8</b><span>DevOps certifications</span></div>
+        <div class="hero-stat"><b>AWS · K8s</b><span>core focus</span></div>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipeline-label">// current pipeline stage</div>
+        <div class="pipeline-track" id="pipelineTrack">
+          <div class="pstage" data-stage><div class="node"><span class="led"></span>Support Eng.</div></div>
+          <div class="arrow"></div>
+          <div class="pstage" data-stage><div class="node"><span class="led"></span>Automation</div></div>
+          <div class="arrow"></div>
+          <div class="pstage" data-stage><div class="node"><span class="led"></span>Cloud + IaC</div></div>
+          <div class="arrow"></div>
+          <div class="pstage" data-stage><div class="node"><span class="led"></span>CI/CD</div></div>
+          <div class="arrow"></div>
+          <div class="pstage" data-stage><div class="node"><span class="led"></span>DevOps Eng.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="who">
+        <img class="hero-avatar" src="https://avatars.githubusercontent.com/u/163764594?v=4" alt="Praduman Rai" loading="lazy">
+        <div>
+          <h3>Praduman Rai</h3>
+          <p>DevOps Engineer (in transition)</p>
+        </div>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:pradumanrai9554@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6 12 13 2 6"/><path d="M2 6h20v12H2z"/></svg>
+          pradumanrai9554@gmail.com
+        </a>
+        <a href="tel:+919554663433">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.34 1.9.63 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.29 1.85.5 2.81.63A2 2 0 0 1 22 16.92z"/></svg>
+          +91-9554663433
+        </a>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Delhi, India
+        </span>
+        <a href="https://linkedin.com/in/praduman-rai" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A5.5 5.5 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/praduman-rai
+        </a>
+        <a href="https://github.com/PradumanRai" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/PradumanRai
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div data-reveal>
+      <div class="eyebrow">About</div>
+      <h2 style="margin-bottom:22px;">From keeping systems online to building the systems that keep themselves online.</h2>
+      <div class="about-text">
+        <p>Results-driven IT professional with 3+ years of technical support experience, now transitioning into DevOps. Hands-on with automation, CI/CD pipelines, containerization, and cloud infrastructure, with a problem-solving foundation built from real production support work.</p>
+        <p>Day to day at Systools Pvt. Ltd., that means troubleshooting enterprise software across Windows and macOS for a global client base, and — increasingly — automating the repetitive parts of that job with Python and Bash instead of doing them by hand. That automation instinct is what's driving the move into infrastructure-as-code, containers, and pipelines.</p>
+        <p>Currently building structured, hands-on practice across Docker, Kubernetes, Jenkins, AWS CodeBuild/CodeDeploy, and Python automation — backed by eight DevOps-focused certifications completed over the past two years.</p>
+      </div>
+    </div>
+    <div class="fact-panel" data-reveal>
+      <div class="fact-row"><span>Role</span><span>Technical Support → DevOps</span></div>
+      <div class="fact-row"><span>Employer</span><span>Systools Pvt. Ltd.</span></div>
+      <div class="fact-row"><span>Since</span><span>Oct 2022</span></div>
+      <div class="fact-row"><span>Location</span><span>Delhi, India</span></div>
+      <div class="fact-row"><span>Core focus</span><span>AWS · Docker · K8s</span></div>
+      <div class="fact-row"><span>Certifications</span><span>8 (2023–2024)</span></div>
+      <div class="fact-row"><span>Education</span><span>B.C.A.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:var(--bg-panel-2); border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft);">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Technical Skills</div>
+      <h2>The toolbox, organized the way it gets used.</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card" data-reveal>
+        <h4>DevOps Tools</h4>
+        <div class="badge-row">
+          <span class="badge">Git</span><span class="badge">GitHub</span><span class="badge">Jenkins</span>
+          <span class="badge">Docker</span><span class="badge">Kubernetes</span><span class="badge">Ansible</span>
+          <span class="badge">Terraform</span><span class="badge">Vagrant</span>
+        </div>
+      </div>
+      <div class="skill-card" data-reveal>
+        <h4>Cloud — AWS</h4>
+        <div class="badge-row">
+          <span class="badge">EC2</span><span class="badge">S3</span><span class="badge">IAM</span>
+          <span class="badge">CloudWatch</span><span class="badge">Route53</span><span class="badge">VPC</span>
+          <span class="badge">Lambda</span><span class="badge">RDS</span>
+        </div>
+      </div>
+      <div class="skill-card" data-reveal>
+        <h4>CI / CD</h4>
+        <div class="badge-row">
+          <span class="badge">Jenkins Pipelines</span><span class="badge">GitHub Actions</span>
+          <span class="badge">Automated Testing</span><span class="badge">Blue-Green Deploy</span>
+        </div>
+      </div>
+      <div class="skill-card" data-reveal>
+        <h4>Scripting</h4>
+        <div class="badge-row">
+          <span class="badge">Bash</span><span class="badge">Python</span><span class="badge">PowerShell</span>
+          <span class="badge">Shell</span><span class="badge">YAML</span><span class="badge">JSON</span>
+        </div>
+      </div>
+      <div class="skill-card" data-reveal>
+        <h4>Monitoring</h4>
+        <div class="badge-row">
+          <span class="badge">CloudWatch</span><span class="badge">Splunk</span><span class="badge">Prometheus</span>
+          <span class="badge">Grafana</span><span class="badge">ELK Stack</span>
+        </div>
+      </div>
+      <div class="skill-card" data-reveal>
+        <h4>OS &amp; Data</h4>
+        <div class="badge-row">
+          <span class="badge">Ubuntu</span><span class="badge">RedHat</span><span class="badge">CentOS</span>
+          <span class="badge">Windows Server</span><span class="badge">MySQL</span><span class="badge">PostgreSQL</span>
+          <span class="badge">MongoDB</span><span class="badge">Redis</span><span class="badge">Nginx</span><span class="badge">Apache</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Featured Projects</div>
+      <h2>Hands-on lab work, pulled straight from GitHub.</h2>
+      <p class="sub">These are real, working files from the <a href="https://github.com/PradumanRai/devops-learning" target="_blank" rel="noopener" style="color:var(--cyan); text-decoration:underline;">devops-learning</a> repository — practice builds used to learn each tool end-to-end, not production systems. Shown here with what they actually contain, not embellished.</p>
+    </div>
+
+    <div class="proj-grid">
+
+      <div class="proj-card" data-reveal>
+        <div class="proj-top">
+          <h3>Containerized Java Web App — Build to Deploy</h3>
+          <span class="proj-tag">AWS · K8S</span>
+        </div>
+        <p class="proj-desc">A Maven-built Java/Tomcat web app packaged two ways: a Kubernetes deployment, and a parallel AWS CodeBuild + CodeDeploy pipeline definition — covering both the "cloud-native" and "classic EC2" deploy paths for the same artifact.</p>
+        <div class="badge-row">
+          <span class="badge">Java · Maven</span><span class="badge">Tomcat 8</span><span class="badge">Docker</span>
+          <span class="badge">Kubernetes</span><span class="badge">AWS CodeBuild</span><span class="badge">AWS CodeDeploy</span><span class="badge">Travis CI</span>
+        </div>
+        <ul class="proj-feats">
+          <li>Kubernetes <code>Deployment</code> running 3 replicas behind a <code>NodePort</code> Service</li>
+          <li>AWS CodeBuild spec (<code>buildspec.yaml</code>) installs Corretto 11 and runs <code>mvn clean package</code> as the build artifact stage</li>
+          <li>AWS CodeDeploy <code>appspec.yml</code> wires BeforeInstall / AfterInstall / Start / Stop lifecycle hook scripts for an EC2 target</li>
+        </ul>
+        <div class="proj-foot">
+          <a href="https://github.com/PradumanRai/devops-learning/tree/main/Docker/devops-java-webapp" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            View on GitHub
+          </a>
+          <span class="proj-note">Practice build · not deployed live</span>
+        </div>
+      </div>
+
+      <div class="proj-card" data-reveal>
+        <div class="proj-top">
+          <h3>E-Commerce Skeleton — Jenkins CI/CD Pipeline</h3>
+          <span class="proj-tag">JENKINS</span>
+        </div>
+        <p class="proj-desc">A Dockerized Node.js app driven by a full declarative Jenkins pipeline: build, test, containerize, push to a registry, and roll out to Kubernetes — with cleanup on both success and failure.</p>
+        <div class="badge-row">
+          <span class="badge">Node.js</span><span class="badge">Docker</span><span class="badge">Jenkins</span>
+          <span class="badge">Kubernetes (kubectl)</span><span class="badge">Docker Hub</span>
+        </div>
+        <ul class="proj-feats">
+          <li>Five-stage Jenkinsfile: checkout → build/test → Docker build &amp; tag → push → <code>kubectl set image</code> rollout</li>
+          <li>Credentials handled through Jenkins <code>withCredentials</code> for both Docker Hub and the cluster kubeconfig</li>
+          <li>Image tagged by Jenkins <code>BUILD_NUMBER</code> as well as <code>latest</code> for traceable rollbacks</li>
+          <li>Dockerfile hardened with a non-root user and a container <code>HEALTHCHECK</code></li>
+        </ul>
+        <div class="proj-foot">
+          <a href="https://github.com/PradumanRai/devops-learning/tree/main/Docker/Abstergo-Corp-s-online-shopping-portal" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            View on GitHub
+          </a>
+          <span class="proj-note">Pipeline-authoring practice</span>
+        </div>
+      </div>
+
+      <div class="proj-card" data-reveal>
+        <div class="proj-top">
+          <h3>Selenium Test Automation in Jenkins</h3>
+          <span class="proj-tag">TESTING</span>
+        </div>
+        <p class="proj-desc">A Maven + Selenium test suite wired straight into Jenkins, with environment setup as its own pipeline stage and JUnit results published for visibility.</p>
+        <div class="badge-row">
+          <span class="badge">Java · Maven</span><span class="badge">Selenium</span><span class="badge">Jenkins</span><span class="badge">JUnit</span>
+        </div>
+        <ul class="proj-feats">
+          <li>Jenkinsfile with distinct <code>Setup</code> and <code>Test</code> stages</li>
+          <li><code>setup_selenium.sh</code> handles environment prep before <code>mvn clean test</code> runs</li>
+          <li>JUnit XML results published from <code>target/surefire-reports</code> for in-Jenkins test visibility</li>
+        </ul>
+        <div class="proj-foot">
+          <a href="https://github.com/PradumanRai/devops-learning/tree/main/Jenkins/sample-selenium-test" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            View on GitHub
+          </a>
+          <span class="proj-note">CI test-automation practice</span>
+        </div>
+      </div>
+
+      <div class="proj-card" data-reveal>
+        <div class="proj-top">
+          <h3>CSV Processing Script, Dockerized</h3>
+          <span class="proj-tag">PYTHON</span>
+        </div>
+        <p class="proj-desc">A small Python + Pandas script that summarizes a CSV file, packaged into a slim Docker image so it runs the same way anywhere — the smallest possible example of "containerize the automation."</p>
+        <div class="badge-row">
+          <span class="badge">Python</span><span class="badge">Pandas</span><span class="badge">Docker</span>
+        </div>
+        <ul class="proj-feats">
+          <li><code>requirements.txt</code>-driven dependency install baked into the image</li>
+          <li>Single-purpose script (<code>process_data.py</code>) — deliberately minimal, built to learn the Docker packaging step in isolation</li>
+          <li>Slim <code>python:3.9-slim</code> base for fast, repeatable builds</li>
+        </ul>
+        <div class="proj-foot">
+          <a href="https://github.com/PradumanRai/devops-learning/tree/main/Python/python-docker-project" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            View on GitHub
+          </a>
+          <span class="proj-note">Containerized automation practice</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture" style="background:var(--bg-panel-2); border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft);">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Architecture Overview</div>
+      <h2>One artifact, two deploy paths.</h2>
+      <p class="sub">Diagrammed from the actual <code>buildspec.yaml</code>, <code>appspec.yml</code>, and Kubernetes manifests in the Java web-app project above.</p>
+    </div>
+    <div class="arch-panel" data-reveal>
+      <svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#3a4d6b"/></marker>
+        </defs>
+        <!-- source -->
+        <rect x="20" y="150" width="110" height="60" rx="8" fill="#0e1726" stroke="#2a3b56"/>
+        <text x="75" y="176" fill="#e7edf6" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="middle">GitHub</text>
+        <text x="75" y="192" fill="#8a9bb3" font-family="IBM Plex Mono, monospace" font-size="9.5" text-anchor="middle">source repo</text>
+
+        <!-- build -->
+        <rect x="180" y="150" width="120" height="60" rx="8" fill="#1a1102" stroke="#f3a73a"/>
+        <text x="240" y="174" fill="#f3a73a" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="middle">mvn package</text>
+        <text x="240" y="190" fill="#caa467" font-family="IBM Plex Mono, monospace" font-size="9" text-anchor="middle">CodeBuild · Corretto11</text>
+
+        <line x1="130" y1="180" x2="178" y2="180" stroke="#3a4d6b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- artifact -->
+        <rect x="350" y="150" width="100" height="60" rx="8" fill="#0e1726" stroke="#2a3b56"/>
+        <text x="400" y="176" fill="#e7edf6" font-family="IBM Plex Mono, monospace" font-size="11" text-anchor="middle">.war</text>
+        <text x="400" y="192" fill="#8a9bb3" font-family="IBM Plex Mono, monospace" font-size="9" text-anchor="middle">build artifact</text>
+
+        <line x1="300" y1="180" x2="348" y2="180" stroke="#3a4d6b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- branch up: codedeploy -->
+        <line x1="400" y1="150" x2="400" y2="90" stroke="#3a4d6b" stroke-width="1.5"/>
+        <line x1="400" y1="90" x2="455" y2="90" stroke="#3a4d6b" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <rect x="465" y="60" width="80" height="60" rx="8" fill="#0e1726" stroke="#52d6c8"/>
+        <text x="505" y="84" fill="#52d6c8" font-family="IBM Plex Mono, monospace" font-size="10.5" text-anchor="middle">CodeDeploy</text>
+        <text x="505" y="99" fill="#7fe0d4" font-family="IBM Plex Mono, monospace" font-size="9" text-anchor="middle">EC2 · Tomcat</text>
+        <text x="505" y="111" fill="#7fe0d4" font-family="IBM Plex Mono, monospace" font-size="8" text-anchor="middle">lifecycle hooks</text>
+
+        <!-- branch down: kubernetes -->
+        <line x1="400" y1="210" x2="400" y2="270" stroke="#3a4d6b" stroke-width="1.5"/>
+        <line x1="400" y1="270" x2="455" y2="270" stroke="#3a4d6b" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <rect x="465" y="240" width="80" height="60" rx="8" fill="#0e1726" stroke="#52d6c8"/>
+        <text x="505" y="263" fill="#52d6c8" font-family="IBM Plex Mono, monospace" font-size="10.5" text-anchor="middle">Kubernetes</text>
+        <text x="505" y="278" fill="#7fe0d4" font-family="IBM Plex Mono, monospace" font-size="9" text-anchor="middle">3 pods</text>
+        <text x="505" y="290" fill="#7fe0d4" font-family="IBM Plex Mono, monospace" font-size="8" text-anchor="middle">NodePort :31028</text>
+
+        <circle cx="400" cy="180" r="3.5" fill="#f3a73a"/>
+      </svg>
+      <div class="arch-notes">
+        <div class="note"><span class="marker" style="background:var(--amber);"></span><div><b>Build stage.</b> AWS CodeBuild installs Java 11 (Corretto) and runs the Maven build, producing a deployable <code>.war</code> artifact.</div></div>
+        <div class="note"><span class="marker" style="background:var(--cyan);"></span><div><b>Path A — CodeDeploy.</b> The artifact deploys to an EC2/Tomcat target via appspec lifecycle hooks (before-install, after-install, start, stop).</div></div>
+        <div class="note"><span class="marker" style="background:var(--cyan);"></span><div><b>Path B — Kubernetes.</b> The same app, containerized, runs as 3 replicas behind a NodePort Service — the cloud-native alternative to the EC2 path.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB STATS -->
+<section id="github">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">GitHub Activity</div>
+      <h2>Live from github.com/PradumanRai</h2>
+      <p class="sub">Pulled directly from the GitHub API — shown as-is, including the fact that this is an early, growing profile.</p>
+    </div>
+
+    <div class="gh-grid" data-reveal>
+      <div class="gh-stat"><b>4</b><span>Public repositories</span></div>
+      <div class="gh-stat"><b>20</b><span>Contributions, past year</span></div>
+      <div class="gh-stat"><b>5</b><span>Languages in active use</span></div>
+      <div class="gh-stat"><b>Mar 2024</b><span>On GitHub since</span></div>
+    </div>
+
+    <div class="gh-panels">
+      <div class="gh-panel" data-reveal>
+        <h4>Language breakdown — devops-learning</h4>
+        <div class="lang-row">
+          <div class="lang-label"><span>Java</span><span>40%</span></div>
+          <div class="lang-bar"><i style="width:40%; background:var(--amber);"></i></div>
+        </div>
+        <div class="lang-row">
+          <div class="lang-label"><span>JavaScript</span><span>32%</span></div>
+          <div class="lang-bar"><i style="width:32%; background:var(--cyan);"></i></div>
+        </div>
+        <div class="lang-row">
+          <div class="lang-label"><span>Dockerfile</span><span>17%</span></div>
+          <div class="lang-bar"><i style="width:17%; background:#7a8ab0;"></i></div>
+        </div>
+        <div class="lang-row">
+          <div class="lang-label"><span>Shell</span><span>15%</span></div>
+          <div class="lang-bar"><i style="width:15%; background:var(--rose);"></i></div>
+        </div>
+        <div class="lang-row">
+          <div class="lang-label"><span>Python</span><span>1%</span></div>
+          <div class="lang-bar"><i style="width:1%; background:#5c6e87;"></i></div>
+        </div>
+        <p class="gh-note">By bytes of code, from the GitHub Languages API for the devops-learning repo.</p>
+      </div>
+
+      <div class="gh-panel" data-reveal>
+        <h4>Contribution calendar</h4>
+        <img class="contrib-img" src="https://ghchart.rshah.org/52d6c8/PradumanRai" alt="GitHub contribution calendar for PradumanRai" loading="lazy" onerror="this.style.display='none'; document.getElementById('chartFallback').style.display='block';">
+        <p class="gh-note" id="chartFallback" style="display:none;">Live contribution graph couldn't load here — view it directly on <a href="https://github.com/PradumanRai" target="_blank" rel="noopener" style="color:var(--cyan);">github.com/PradumanRai</a>.</p>
+        <p class="gh-note">Rendered by a third-party public chart service (ghchart.rshah.org) from public commit data.</p>
+      </div>
+    </div>
+
+    <div class="gh-panel" style="margin-top:22px;" data-reveal>
+      <h4>devops-learning — repo structure</h4>
+      <div class="repo-tree">devops-learning/
+├── <b>Docker/</b>
+│   ├── devops-java-webapp/        (Maven + Tomcat + K8s + AWS CodeBuild/CodeDeploy)
+│   └── Abstergo-Corp-.../         (Node.js + Jenkins CI/CD pipeline)
+├── <b>Jenkins/</b>
+│   └── sample-selenium-test/      (Maven + Selenium + Jenkins)
+├── <b>Linux/</b>
+│   └── Shell-Scripts/             (shell scripting practice)
+└── <b>Python/</b>
+    └── python-docker-project/     (Pandas script, dockerized)</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--bg-panel-2); border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft);">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Professional Experience</div>
+      <h2>Where the automation habit started.</h2>
+    </div>
+    <div class="exp-card" data-reveal>
+      <div class="exp-head">
+        <div>
+          <h3>Technical Support Engineer</h3>
+          <p class="role-sub">Systools Pvt. Ltd.</p>
+        </div>
+        <time>Oct 2022 — Present</time>
+      </div>
+      <ul class="exp-list">
+        <li>Provide technical support for enterprise software across Windows and macOS for a global client base</li>
+        <li>Troubleshoot complex issues via email, chat, and remote sessions, maintaining 95% customer satisfaction</li>
+        <li>Automated repetitive support tasks using Python and Bash, cutting resolution time by 40%</li>
+        <li>Collaborated with development teams to identify and resolve product bugs, improving overall quality</li>
+        <li>Mentored junior staff on troubleshooting methodology; maintained a 98% first-call resolution rate</li>
+        <li>Wrote knowledge base articles and contributed to product testing and QA</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Certifications</div>
+      <h2>Eight certifications, one direction.</h2>
+    </div>
+    <div class="timeline" data-reveal>
+      <div class="t-item">
+        <span class="t-year">2024</span>
+        <h4>AWS DevOps Engineer Professional</h4>
+        <p>Edureka</p>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2023</span>
+        <h4>Docker Containerization</h4>
+        <p>Edureka</p>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2023</span>
+        <h4>Kubernetes Administration</h4>
+        <p>Edureka</p>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2023</span>
+        <h4>DevOps Fundamentals</h4>
+        <p>Edureka</p>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2023</span>
+        <h4>Linux System Administration</h4>
+        <p>Edureka</p>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2023</span>
+        <h4>Jenkins CI/CD Pipeline Development</h4>
+        <p></p>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2023</span>
+        <h4>Terraform Infrastructure as Code</h4>
+        <p></p>
+      </div>
+      <div class="t-item">
+        <span class="t-year">2023</span>
+        <h4>Python Programming for DevOps</h4>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section style="background:var(--bg-panel-2); border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft);">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Education</div>
+      <h2>Foundation.</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card" data-reveal>
+        <h4>Bachelor's Degree in Computer Applications</h4>
+        <p>Siddharth University, Uttar Pradesh</p>
+        <span class="edu-tag">B.C.A.</span>
+      </div>
+      <div class="edu-card" data-reveal>
+        <h4>Diploma in Hardware &amp; Networking</h4>
+        <p>IIJT Academy, Gorakhpur</p>
+        <span class="edu-tag">DIPLOMA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section>
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Additional Achievements</div>
+      <h2>Outside the day job.</h2>
+    </div>
+    <div class="ach-grid">
+      <div class="ach-card" data-reveal>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+        <h4>Open Source</h4>
+        <p>Active contributor to DevOps tooling and documentation on GitHub.</p>
+      </div>
+      <div class="ach-card" data-reveal>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <h4>Technical Writing</h4>
+        <p>Published articles on DevOps best practices and automation techniques.</p>
+      </div>
+      <div class="ach-card" data-reveal>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h4>Community</h4>
+        <p>Active in local DevOps meetups and online technical communities.</p>
+      </div>
+      <div class="ach-card" data-reveal>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <h4>Process Improvement</h4>
+        <p>Workflow optimizations resulting in measurable efficiency gains.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section style="background:var(--bg-panel-2); border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft);">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Career Roadmap</div>
+      <h2>Where this is headed.</h2>
+      <p class="sub">A personal goal map, not a job history — the "now" marker is the only fixed point.</p>
+    </div>
+    <div class="road-track" data-reveal>
+      <div class="road-stop done">
+        <div class="road-dot"></div>
+        <span class="road-when">2022 — 2024</span>
+        <h4>Technical Support</h4>
+        <p>Built the troubleshooting and scripting foundation.</p>
+      </div>
+      <div class="road-stop now">
+        <div class="road-dot"></div>
+        <span class="road-when">Now</span>
+        <h4>DevOps Transition</h4>
+        <p>Certifications, hands-on labs, and a growing GitHub practice repo.</p>
+      </div>
+      <div class="road-stop">
+        <div class="road-dot"></div>
+        <span class="road-when">Next 6–12 mo</span>
+        <h4>Associate DevOps / Cloud Engineer</h4>
+        <p>First DevOps-titled role, owning real pipelines and infra.</p>
+      </div>
+      <div class="road-stop">
+        <div class="road-dot"></div>
+        <span class="road-when">2–3 yrs</span>
+        <h4>DevOps Engineer</h4>
+        <p>End-to-end ownership of CI/CD, IaC, and cloud environments.</p>
+      </div>
+      <div class="road-stop">
+        <div class="road-dot"></div>
+        <span class="road-when">Long-term</span>
+        <h4>Platform / SRE</h4>
+        <p>Scaling reliability and developer experience across teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section>
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Blog</div>
+      <h2>Writing — coming soon.</h2>
+      <p class="sub">This section is reserved for upcoming write-ups on DevOps practices and automation. Nothing published here yet.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card" data-reveal>
+        <span class="tag">PLANNED</span>
+        <h4>Building a CI/CD pipeline from scratch</h4>
+        <p>Coming soon</p>
+      </div>
+      <div class="blog-card" data-reveal>
+        <span class="tag">PLANNED</span>
+        <h4>Kubernetes basics for support engineers</h4>
+        <p>Coming soon</p>
+      </div>
+      <div class="blog-card" data-reveal>
+        <span class="tag">PLANNED</span>
+        <h4>Notes from the AWS DevOps certification</h4>
+        <p>Coming soon</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg-panel-2); border-top:1px solid var(--border-soft);">
+  <div class="wrap contact-grid">
+    <div class="contact-info" data-reveal>
+      <div class="eyebrow">Contact</div>
+      <h2>Let's talk DevOps.</h2>
+      <p class="sub" style="margin-top:14px;">Open to DevOps, Cloud, and Site Reliability roles. The fastest way to reach me is email.</p>
+      <div class="contact-list">
+        <a href="mailto:pradumanrai9554@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6 12 13 2 6"/><path d="M2 6h20v12H2z"/></svg>
+          pradumanrai9554@gmail.com
+        </a>
+        <a href="tel:+919554663433">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.34 1.9.63 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.29 1.85.5 2.81.63A2 2 0 0 1 22 16.92z"/></svg>
+          +91-9554663433
+        </a>
+        <a href="https://linkedin.com/in/praduman-rai" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A5.5 5.5 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/praduman-rai
+        </a>
+        <a href="https://github.com/PradumanRai" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/PradumanRai
+        </a>
+      </div>
+    </div>
+
+    <form class="form-panel" id="contactForm" data-reveal novalidate>
+      <div class="field">
+        <label for="cName">Name</label>
+        <input type="text" id="cName" name="name" autocomplete="name">
+        <div class="err" id="errName"></div>
+      </div>
+      <div class="field">
+        <label for="cEmail">Email</label>
+        <input type="email" id="cEmail" name="email" autocomplete="email">
+        <div class="err" id="errEmail"></div>
+      </div>
+      <div class="field">
+        <label for="cMsg">Message</label>
+        <textarea id="cMsg" name="message" rows="4"></textarea>
+        <div class="err" id="errMsg"></div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+        Send message
+      </button>
+      <div class="form-status" id="formStatus"></div>
+      <p class="gh-note" style="margin-top:10px;">This opens your email client with the message pre-filled — there's no backend here to send it for you.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <p>© 2026 Praduman Rai. Built from real résumé and GitHub data — no fabricated metrics.</p>
+    <p><img src="https://komarev.com/ghpvc/?username=PradumanRai&label=visitors&color=1f2f47&style=flat" alt="Visitor count" style="vertical-align:middle; height:20px;" loading="lazy"></p>
+    <a href="#top" class="back-top">↑ Back to top</a>
+  </div>
+</footer>
+
+<script>
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // scroll reveal
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  if (reduced) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  // pipeline strip sequential activation (signature element)
+  function runPipeline(){
+    const stages = document.querySelectorAll('#pipelineTrack [data-stage]');
+    stages.forEach(s => s.classList.remove('done','live','ok'));
+    if (reduced) {
+      stages.forEach((s, i) => s.classList.add(i === stages.length - 1 ? 'ok' : 'done'));
+      return;
+    }
+    let i = 0;
+    function step(){
+      stages.forEach((s, idx) => { if (idx < i) s.classList.add('done'); });
+      if (i < stages.length) {
+        stages[i].classList.add('live');
+        setTimeout(() => {
+          stages[i].classList.remove('live');
+          stages[i].classList.add(i === stages.length - 1 ? 'ok' : 'done');
+          i++;
+          step();
+        }, 480);
+      }
+    }
+    step();
+  }
+  window.addEventListener('load', () => setTimeout(runPipeline, 300));
+
+  // contact form: validate + mailto fallback (static site, no backend)
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('cName').value.trim();
+    const email = document.getElementById('cEmail').value.trim();
+    const msg = document.getElementById('cMsg').value.trim();
+    document.getElementById('errName').textContent = '';
+    document.getElementById('errEmail').textContent = '';
+    document.getElementById('errMsg').textContent = '';
+    let ok = true;
+    if (!name) { document.getElementById('errName').textContent = 'Please enter your name.'; ok = false; }
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!emailOk) { document.getElementById('errEmail').textContent = 'Please enter a valid email.'; ok = false; }
+    if (!msg) { document.getElementById('errMsg').textContent = 'Please add a short message.'; ok = false; }
+    if (!ok) return;
+
+    const subject = encodeURIComponent('Portfolio contact from ' + name);
+    const body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+    window.location.href = 'mailto:pradumanrai9554@gmail.com?subject=' + subject + '&body=' + body;
+    document.getElementById('formStatus').textContent = 'Opening your email client…';
+  });
+</script>
+
+</body>
+</html>
